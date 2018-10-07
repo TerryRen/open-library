@@ -83,3 +83,31 @@ nsenter -t 3097 -n netstat -np | grep tcp
 nsenter -t 3188 -n netstat -n | awk '/^tcp/ {++state[$NF]} END {for(key in state) print key,"\t",state[key]}'
 nsenter -t 3188 -n netstat -np | grep TIME_WAIT | wc -l
 ```
+
+### Gitlab
+
+```bash
+sudo docker run \
+    --publish 9443:443 --publish 9080:80 --publish 9022:22 \
+    --name gitlab \
+    --restart always \
+    --volume /srv/gitlab/config:/etc/gitlab \
+    --volume /srv/gitlab/logs:/var/log/gitlab \
+    --volume /srv/gitlab/data:/var/opt/gitlab \
+    gitlab/gitlab-ce:latest
+```
+
+### Jenkins
+
+`注意设置host目录权限:1000`
+
+```bash
+sudo docker run --name jenkins --restart always -p 9090:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home jenkins/jenkins:lts
+```
+
+
+
+
+
+
+
