@@ -84,6 +84,24 @@ nsenter -t 3188 -n netstat -n | awk '/^tcp/ {++state[$NF]} END {for(key in state
 nsenter -t 3188 -n netstat -np | grep TIME_WAIT | wc -l
 ```
 
+### Docker registry-mirror
+
+#### 方法一
+```bash
+docker --registry-mirror=https://registry.docker-cn.com daemon
+```
+
+#### 方法二
+永久修改
+```txt
+修改文件 /etc/systemd/system/docker.service
+ExecStart=/usr/bin/dockerd --registry-mirror=https://registry.docker-cn.com
+```
+
+```bash
+systemctl restart docker
+```
+
 ### Gitlab
 
 ```bash
@@ -102,7 +120,17 @@ sudo docker run \
 `注意设置host目录权限:1000`
 
 ```bash
-sudo docker run --name jenkins --restart always -p 9090:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home jenkins/jenkins:lts
+sudo docker run \
+	--name jenkins \
+	--restart always -p 9090:8080 -p 50000:50000 \
+	-v /srv/jenkins:/var/jenkins_home \
+	jenkins/jenkins:lts
+```
+
+### Redis
+
+```bash
+docker run --name redis -p 6379:6379 -v /srv/redis/data:/data -d redis redis-server --appendonly yes
 ```
 
 
