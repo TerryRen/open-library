@@ -102,13 +102,26 @@ ExecStart=/usr/bin/dockerd --registry-mirror=https://registry.docker-cn.com
 systemctl restart docker
 ```
 
+### Zbox
+
+```bash
+mkdir -p /srv/zbox && docker run -d -p 8111:80 \
+        --restart=always \
+        -e USER="root" -e PASSWD="123456" \
+        -e BIND_ADDRESS="false" \
+        -e SMTP_HOST="163.177.90.125 smtp.exmail.qq.com" \
+        -v /srv/zbox/:/opt/zbox/ \
+        --name zentao-server \
+        idoop/zentao:latest
+```
+
 ### Gitlab
 
 https://docs.gitlab.com/omnibus/docker/
 
 ```bash
 sudo docker run --detach \
-	--hostname gitlab.example.com \
+	--hostname my.domain.com \
 	--env GITLAB_OMNIBUS_CONFIG="external_url 'http://my.domain.com/'; gitlab_rails['lfs_enabled'] = true;" \
     --publish 9443:443 --publish 9080:80 --publish 9022:22 \
     --name gitlab \
@@ -136,10 +149,4 @@ sudo docker run \
 ```bash
 docker run --name redis -p 6379:6379 -v /srv/redis/data:/data -d redis redis-server --appendonly yes
 ```
-
-
-
-
-
-
 
