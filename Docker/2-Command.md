@@ -121,8 +121,6 @@ https://docs.gitlab.com/omnibus/docker/
 
 ```bash
 sudo docker run --detach \
-	--hostname my.domain.com \
-	--env GITLAB_OMNIBUS_CONFIG="external_url 'http://my.domain.com/'; gitlab_rails['lfs_enabled'] = true;" \
     --publish 9443:443 --publish 9080:80 --publish 9022:22 \
     --name gitlab \
     --restart always \
@@ -131,6 +129,9 @@ sudo docker run --detach \
     --volume /srv/gitlab/data:/var/opt/gitlab \
     gitlab/gitlab-ce:latest
 ```
+修改gitlab.rb文件
+external_url 'http://gitlab.example.com:9090'
+gitlab_rails['gitlab_shell_ssh_port'] = 9022
 
 ### Jenkins
 
