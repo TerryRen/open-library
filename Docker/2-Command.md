@@ -104,8 +104,12 @@ systemctl restart docker
 
 ### Gitlab
 
+https://docs.gitlab.com/omnibus/docker/
+
 ```bash
-sudo docker run \
+sudo docker run --detach \
+	--hostname gitlab.example.com \
+	--env GITLAB_OMNIBUS_CONFIG="external_url 'http://my.domain.com/'; gitlab_rails['lfs_enabled'] = true;" \
     --publish 9443:443 --publish 9080:80 --publish 9022:22 \
     --name gitlab \
     --restart always \
