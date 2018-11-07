@@ -151,3 +151,28 @@ sudo docker run \
 docker run --name redis -p 6379:6379 -v /srv/redis/data:/data -d redis redis-server --appendonly yes
 ```
 
+#### Docker
+```bash
+sudo docker run --detach \
+--hostname 47.101.35.109 \
+--publish 3306:3306 \
+--name mysql \
+--restart always \
+--volume /srv/mysql/conf/my.conf:/etc/my.cnf \
+--volume /srv/mysql/datadir:/var/lib/mysql \
+--volume /srv/mysql/logs:/logs \
+-e MYSQL_ROOT_PASSWORD=xstv@2018 \
+mysql:5.7
+
+#进入容器
+docker exec -it mysql bash
+#链接mysql
+Mysql -u root -p
+#修改mysql
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
+FLUSH PRIVILEGES
+
+#本机链接容器内数据库
+mysql -u root -p -h 127.0.0.1 -P 3306
+```
+
