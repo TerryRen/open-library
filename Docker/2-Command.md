@@ -138,12 +138,26 @@ gitlab_rails['gitlab_shell_ssh_port'] = 9022
 `注意设置host目录权限:1000`
 
 ```bash
-sudo docker run \
+mkdir -p /srv/jenkins
+chmod -R 1000:1000 /srv/jenkins
+sudo docker run -d \
 	--name jenkins \
 	--restart always -p 9090:8080 -p 50000:50000 \
 	-v /srv/jenkins:/var/jenkins_home \
 	jenkins/jenkins:lts
 ```
+
+### nexus3
+```bash
+sudo docker run --detach \
+--hostname 47.101.35.109 \
+--publish 8081:8081 \
+--name nexus3 \
+--restart always\
+--volume /srv/nexus-data:/nexus-data \
+sonatype/nexus3
+```
+
 
 ### Redis
 
