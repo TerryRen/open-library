@@ -172,7 +172,7 @@ sudo docker run --detach \
 --publish 3306:3306 \
 --name mysql \
 --restart always \
---volume /srv/mysql/conf/my.conf:/etc/my.cnf \
+--volume /srv/mysql/conf:/etc/mysql \
 --volume /srv/mysql/datadir:/var/lib/mysql \
 --volume /srv/mysql/logs:/logs \
 -e MYSQL_ROOT_PASSWORD=xstv@2018 \
