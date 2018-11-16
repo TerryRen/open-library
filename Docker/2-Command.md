@@ -160,9 +160,9 @@ sonatype/nexus3
 
 
 ### Redis
-
+https://blog.csdn.net/cookily_liangzai/article/details/80726163
 ```bash
-docker run --name redis -p 6379:6379 -v /srv/redis/data:/data -d redis redis-server --appendonly yes
+docker run --name redis -p 6379:6379 -v /srv/redis/data:/data -v /srv/redis/log:/var/log/redis  -d --restart=always redis:latest redis-server --appendonly yes --requirepass "xstv@2018"
 ```
 
 #### Docker
