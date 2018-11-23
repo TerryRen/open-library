@@ -147,14 +147,14 @@ sudo docker run -d \
 	jenkins/jenkins:lts
 ```
 
-### nexus3
+### nexus3 (8082为Docker端口)
 ```bash
-sudo docker run --detach \
---hostname 47.101.35.109 \
---publish 8081:8081 \
+sudo docker run -d \
 --name nexus3 \
---restart always\
---volume /srv/nexus-data:/nexus-data \
+--restart always \
+--hostname 47.101.35.109 \
+-p 8081:8081 -p 8082:8082 \
+-v /srv/nexus-data:/nexus-data \
 sonatype/nexus3
 ```
 
